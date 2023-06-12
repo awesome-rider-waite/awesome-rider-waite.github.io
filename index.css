@@ -1,0 +1,20 @@
+.serif{
+    font-size: x-large;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.mesa-das-cartas{
+    padding: 20px;
+    width: 85vw;
+    min-height: 85vh;
+}
+
+
+.carta{
+    width: fit-content;
+    height: fit-content;
+    margin: 2px;
+}
