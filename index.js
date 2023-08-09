@@ -9,6 +9,21 @@ const arcanos_menores_copas_c = document.body.querySelector("#arcanos-menores-co
 const arcanos_menores_ouros = document.body.querySelector("#arcanos-menores-ouros");
 const arcanos_menores_ouros_c = document.body.querySelector("#arcanos-menores-ouros-c");
 
+const cortes_switch = document.body.querySelector("#cortes-switch");
+const naipes_switch = document.body.querySelector("#naipes-switch");
+
+function showToast(title="", message="") {
+    const toastLiveExample = document.getElementById('liveToast');
+    const toastText = toastLiveExample.querySelector(".toast-body");
+    const toastTitle = document.getElementById("toast-title");
+
+    toastTitle.innerHTML = title;
+    toastText.innerHTML = message;
+
+    const toast = new bootstrap.Toast(toastLiveExample)
+    toast.show()
+}
+
 // BOTÃO DE TIRAR CARTA:
 const tirarCarta = document.body.querySelector("#tirar-carta");
 
@@ -20,6 +35,16 @@ const resetar = document.body.querySelector("#resetar");
 
 // CAMPO ONDE AS CARTAS VÃO:
 const mesaCartas = document.body.querySelector(".mesa-das-cartas");
+
+function dispatchShuffle() { embaralhar.dispatchEvent(new Event("click")); }
+
+function changeSwitch(switches=[]){
+    switches.forEach((v) => {
+        v.checked = !v.checked
+    })
+
+    dispatchShuffle();
+}
 
 // ARRAY DE TODAS AS CARTAS
 var todasCartas = [];
@@ -35,6 +60,7 @@ embaralhar.addEventListener("click", (e) => { // DETECTAR SE O BOTÃO DE EMBARAL
             arcanos_menores_paus_c.checked, arcanos_menores_espadas.checked, arcanos_menores_espadas_c.checked,
             arcanos_menores_copas.checked, arcanos_menores_copas_c.checked, arcanos_menores_ouros.checked, arcanos_menores_ouros_c.checked, CARTAS_RETIRADAS);
 
+    document.querySelector("#cartas-contagem").innerHTML = todasCartas.length;
     tirarCarta.disabled = false;
 });
 
@@ -42,8 +68,9 @@ tirarCarta.addEventListener("click", (e) => { // DETECTAR SE O BOTÃO DE TIRAR A
     if(todasCartas[0] != undefined) {
         CARTAS_NA_MESA+=1;
         colocarCarta(todasCartas[0]);
-	CARTAS_RETIRADAS.push(todasCartas[0]);
+	    CARTAS_RETIRADAS.push(todasCartas[0]);
         todasCartas.shift();
+        document.querySelector("#cartas-contagem").innerHTML = todasCartas.length;
     }
 })
 
@@ -52,10 +79,12 @@ resetar.addEventListener("click", (e) => {
     todasCartas = [];
     tirarCarta.disabled = true;
     mesaCartas.innerHTML = "";
+    showToast("A mesa foi limpa", "Todas as cartas foram retiradas da mesa!");
+    document.querySelector("#cartas-contagem").innerHTML = 78;
 })
 
 function colocarCarta(carta) {
-    mesaCartas.innerHTML += `<div class="border p-3 carta"><p>${CARTAS_NA_MESA}</p><img height="350px" src="cartas/${carta}.jpg" /><div>`;
+    mesaCartas.innerHTML += `<div class="border rounded text-center p-2 carta"><p class="fs-5">${CARTAS_NA_MESA}</p><img height="350px" src="cartas/${carta}.jpg" /><div>`;
 }
 
 function embaralharCartas(maiores, menores_paus, menores_paus_c,
@@ -134,34 +163,12 @@ menores_espadas, menores_espadas_c, menores_copas, menores_copas_c, menores_ouro
         return arr;
     }
 
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
-    todasCartas = shuffleArray(todasCartas);
+    let cycles = 0;
+    while (cycles != 418) {
+        todasCartas = shuffleArray(todasCartas);
+        cycles++
+    }
     
+    showToast("Deck embaralhado", "O deck foi embaralhado com sucesso");
     return todasCartas;
 }
