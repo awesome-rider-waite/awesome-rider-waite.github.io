@@ -77,6 +77,19 @@ tirarCarta.addEventListener("click", (e) => { // DETECTAR SE O BOTÃO DE TIRAR A
 resetar.addEventListener("click", (e) => {
     CARTAS_RETIRADAS = []
     todasCartas = [];
+    
+    arcanos_maiores.checked = true;
+    arcanos_menores_paus.checked = true;
+    arcanos_menores_paus_c.checked = true;
+    arcanos_menores_espadas.checked = true;
+    arcanos_menores_espadas_c.checked = true;
+    arcanos_menores_copas.checked = true;
+    arcanos_menores_copas_c.checked = true;
+    arcanos_menores_ouros.checked = true;
+    arcanos_menores_ouros_c.checked = true;
+    cortes_switch.checked = true;
+    naipes_switch.checked = true;
+
     tirarCarta.disabled = true;
     mesaCartas.innerHTML = "";
     showToast("A mesa foi limpa", "Todas as cartas foram retiradas da mesa!");
