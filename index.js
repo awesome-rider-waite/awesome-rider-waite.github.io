@@ -24,6 +24,8 @@ function gerarNumeroInteiroAleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function dispatchShuffle() { embaralhar.dispatchEvent(new Event("click")); }
+
 window.onload = () => {
     const numUm = gerarNumeroInteiroAleatorio(50, 200);
     const numDois = gerarNumeroInteiroAleatorio(301, 500);
@@ -31,6 +33,8 @@ window.onload = () => {
     const valorGerado = gerarNumeroInteiroAleatorio(numUm, numDois);
     inputNumero.value = valorGerado;
     embaralhamento = valorGerado;
+
+    dispatchShuffle();
 }
 
 const cortes_switch = document.body.querySelector("#cortes-switch");
@@ -59,8 +63,6 @@ const resetar = document.body.querySelector("#resetar");
 
 // CAMPO ONDE AS CARTAS VÃO:
 const mesaCartas = document.body.querySelector(".mesa-das-cartas");
-
-function dispatchShuffle() { embaralhar.dispatchEvent(new Event("click")); }
 
 function changeSwitch(switches = []) {
     switches.forEach((v) => {
