@@ -12,6 +12,9 @@ body{
     min-height: 85vh;
 }
 
+.largura-mesa{
+    width: 85vw;
+}
 
 .carta{
     width: fit-content;

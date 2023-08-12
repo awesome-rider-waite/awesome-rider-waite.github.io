@@ -1,129 +1,296 @@
 <!DOCTYPE html>
 <html lang="pt">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Rider Waite</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link href="./index.css" rel="stylesheet">
-    </head>
-    <body>
-        <nav class="navbar navbar-light bg-light fixed-top">
-          <div class="container-fluid">
-    	<div>
-    	    <button type="button" id="embaralhar" class="btn btn-outline-primary">🔃</button>
-    	    <button type="button" id="tirar-carta" class="btn btn-outline-success">+1</button>
-    	    <button type="button" id="resetar" class="btn btn-outline-danger">🗑️</button>
-    	</div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-              <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Configuração do Baralho</h5>
-                  <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-              <div class="offcanvas-body">
-                <div class="form-check form-switch d-flex w-100 justify-content-end">
-                    <label class="form-check-label" for="arcanos-menores"><h5><u>Arcanos Menores</u></h5></label>
-                </div>
-                <div>
-                    <div class="form-check form-switch mt-2 d-flex w-100 justify-content-between">
-                        <input class="form-check-input" type="checkbox" role="switch" id="naipes-switch" onchange="changeSwitch([arcanos_menores_paus, arcanos_menores_espadas, arcanos_menores_copas, arcanos_menores_ouros])" checked>
-                        <label class="form-check-label" for="naipes-switch"><h5>Naipes</h5></label>
-                    </div>
-                </div>
-    	    <hr />
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-copas" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-copas">Copas</label>
-                            </div>
-    	            </li>
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-paus" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-paus">Paus</label>
-                            </div>
-    	            </li>
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-espadas" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-espadas">Espadas</label>
-                            </div>
-    	            </li>
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-ouros" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-ouros">Ouros</label>
-                            </div>
-    	            </li>
-                </ul>
-                <div class="form-check form-switch d-flex w-100 justify-content-between mt-5">
-                    <input class="form-check-input" type="checkbox" role="switch" id="cortes-switch" onchange="changeSwitch([arcanos_menores_paus_c, arcanos_menores_espadas_c, arcanos_menores_copas_c, arcanos_menores_ouros_c])" checked>
-                    <label class="form-check-label" for="cortes-switch"><h5>Figuras da corte</h5></label>
-                </div>
 
-        	    <hr />
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-copas-c" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-copas-c">Copas</label>
-                            </div>
-    	            </li>
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-paus-c" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-paus-c">Paus</label>
-                            </div>
-    	            </li>
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-espadas-c" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-espadas-c">Espadas</label>
-                            </div>
-    	            </li>
-    	            <li class="nav-item">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-ouros-c" onchange="dispatchShuffle()" checked>
-                                <label class="form-check-label" for="arcanos-menores-ouros-c">Ouros</label>
-                            </div>
-    	            </li>
-                </ul>
-    	    
-                <div class="form-check form-switch mt-5 d-flex w-100 justify-content-between">
-                    <input class="form-check-input" type="checkbox" role="switch" id="arcanos-maiores" onchange="dispatchShuffle()" checked>
-                    <label class="form-check-label" for="arcanos-maiores"><h5><u>Arcanos Maiores</u></h5></label>
-                </div>
-                <hr/>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Tarot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="./index.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Rider Waite</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-3 me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link fw-bolder" aria-current="page" href="#" data-bs-toggle="modal"
+              data-bs-target="#modalconfiguracoes"><u>Configurações</u></a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Tiragens</a>
+            <ul class="dropdown-menu text-center">
+              <li><a class="dropdown-item" href="#">Abrir última tiragem</a></li>
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalhistorico">Mostrar histórico</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Carregar histórico</a></li>
+              <li><a class="dropdown-item" href="#">Descarregar histórico</a></li>
+              <li><a class="dropdown-item" href="#">Baixar histórico</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Baralhos</a>
+            <ul class="dropdown-menu text-center">
+              <li><a class="dropdown-item" href="#">Rider Waite</a></li>
+              <li><a class="dropdown-item" href="#">Thoth</a></li>
+            </ul>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="modal fade" id="modalhistorico" tabindex="-1" aria-labelledby="modalhistorico" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalhistorico">Histórico de Tiragens</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-historico-body">
+          <div class="card mt-2">
+            <div class="card-body">
+              <h5 class="card-title text-center">11/08/2023</h5>
+              <p class="card-text mt-4 mb-4 text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Asperiores neque amet nemo culpa itaque maiores id aut, dolore natus nisi incidunt autem impedit
+                aspernatur nesciunt fugiat iste aliquid consequatur distinctio.</p>
+              <div class="d-flex justify-content-between">
+                <a href="#" class="card-link">Carregar essa tiragem</a>
+                <a href="#" class="card-link">Apagar essa tiragem</a>
               </div>
             </div>
           </div>
-        </nav>
-
-        <div class="toast-container position-fixed bottom-0 start-0 p-3">
-          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-              <strong class="me-auto" id="toast-title"></strong>
-              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          <div class="card mt-2">
+            <div class="card-body">
+              <h5 class="card-title text-center">10/08/2023</h5>
+              <p class="card-text mt-4 mb-4 text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Asperiores neque amet nemo culpa itaque maiores id aut, dolore natus nisi incidunt autem impedit
+                aspernatur nesciunt fugiat iste aliquid consequatur distinctio.</p>
+              <div class="d-flex justify-content-between">
+                <a href="#" class="card-link">Carregar essa tiragem</a>
+                <a href="#" class="card-link">Apagar essa tiragem</a>
+              </div>
             </div>
-            <div class="toast-body"></div>
+          </div>
+          <div class="card mt-2">
+            <div class="card-body">
+              <h5 class="card-title text-center">09/08/2023</h5>
+              <p class="card-text mt-4 mb-4 text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Asperiores neque amet nemo culpa itaque maiores id aut, dolore natus nisi incidunt autem impedit
+                aspernatur nesciunt fugiat iste aliquid consequatur distinctio.</p>
+              <div class="d-flex justify-content-between">
+                <a href="#" class="card-link">Carregar essa tiragem</a>
+                <a href="#" class="card-link">Apagar essa tiragem</a>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-2">
+            <div class="card-body">
+              <h5 class="card-title text-center">08/08/2023</h5>
+              <p class="card-text mt-4 mb-4 text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Asperiores neque amet nemo culpa itaque maiores id aut, dolore natus nisi incidunt autem impedit
+                aspernatur nesciunt fugiat iste aliquid consequatur distinctio.</p>
+              <div class="d-flex justify-content-between">
+                <a href="#" class="card-link">Carregar essa tiragem</a>
+                <a href="#" class="card-link">Apagar essa tiragem</a>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="d-flex mb-5 mt-5 pt-5 flex-column w-100 align-items-center">
-            <div class="d-flex align-items-center flex-column flex-wrap border rounded">
-                <div class="pt-3 pb-2 border-bottom w-100 d-flex justify-content-center"><h5><i>Restam <span id="cartas-contagem">78</span> cartas no deck</i></h5></div>
-                <div class="mesa-das-cartas d-flex justify-content-center flex-wrap">
+      </div>
+    </div>
+  </div>
 
-                </div>
-            </div>
+  <div class="modal fade" id="modalconfiguracoes" tabindex="-1" aria-labelledby="modalconfiguracoes" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalconfiguracoes">Configurações</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <div>
+            <div class="d-flex w-100 justify-content-end">
+              <h5 for="numero">Embaralhamento</h5>
+            </div>
+            <input type="number" id="numero" name="numero" class="form-control">
+            <small class="text-danger" id="error-message"></small>
+          </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
-    </body>
+          <div class="form-check form-switch d-flex w-100 mt-4 justify-content-end">
+            <label class="form-check-label" for="arcanos-menores">
+              <h5><u>Arcanos Menores</u></h5>
+            </label>
+          </div>
+          <div>
+            <div class="form-check form-switch mt-2 d-flex w-100 justify-content-between">
+              <input class="form-check-input" type="checkbox" role="switch" id="naipes-switch"
+                onchange="changeSwitch([arcanos_menores_paus, arcanos_menores_espadas, arcanos_menores_copas, arcanos_menores_ouros])"
+                checked>
+              <label class="form-check-label" for="naipes-switch">
+                <h5>Naipes</h5>
+              </label>
+            </div>
+          </div>
+          <hr />
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-copas"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-copas">Copas</label>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-paus"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-paus">Paus</label>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-espadas"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-espadas">Espadas</label>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-ouros"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-ouros">Ouros</label>
+              </div>
+            </li>
+          </ul>
+          <div class="form-check form-switch d-flex w-100 justify-content-between mt-5">
+            <input class="form-check-input" type="checkbox" role="switch" id="cortes-switch"
+              onchange="changeSwitch([arcanos_menores_paus_c, arcanos_menores_espadas_c, arcanos_menores_copas_c, arcanos_menores_ouros_c])"
+              checked>
+            <label class="form-check-label" for="cortes-switch">
+              <h5>Figuras da corte</h5>
+            </label>
+          </div>
+
+          <hr />
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-copas-c"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-copas-c">Copas</label>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-paus-c"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-paus-c">Paus</label>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-espadas-c"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-espadas-c">Espadas</label>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="arcanos-menores-ouros-c"
+                  onchange="dispatchShuffle()" checked>
+                <label class="form-check-label" for="arcanos-menores-ouros-c">Ouros</label>
+              </div>
+            </li>
+          </ul>
+
+          <div class="form-check form-switch mt-5 d-flex w-100 justify-content-between">
+            <input class="form-check-input" type="checkbox" role="switch" id="arcanos-maiores"
+              onchange="dispatchShuffle()" checked>
+            <label class="form-check-label" for="arcanos-maiores">
+              <h5><u>Arcanos Maiores</u></h5>
+            </label>
+          </div>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-3">
+    <button type="button" id="embaralhar" class="me-4 btn btn-outline-primary">Embaralhar</button>
+    <button type="button" id="tirar-carta" class="me-4 btn btn-outline-success">Tirar +1</button>
+    <button type="button" id="resetar" class="btn btn-outline-danger">Limpar a mesa</button>
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 start-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto" id="toast-title"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body"></div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <div class="accordion largura-mesa" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header w-100 d-flex justify-content-center" id="panelsStayOpen-headingTwo">
+          <button class="accordion-button collapsed" id="text-size" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+            aria-controls="panelsStayOpen-collapseTwo">
+            Suas anotações (8038)
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+          aria-labelledby="panelsStayOpen-headingTwo">
+          <div class="accordion-body">
+            <textarea class="form-control" maxlength="8038" id="suas-anotacoes" style="min-height: 150px;"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex mb-5 mt-2 flex-column w-100 align-items-center">
+    <div class="d-flex align-items-center flex-column flex-wrap border rounded">
+      <div class="pt-3 pb-2 border-bottom w-100 d-flex justify-content-center">
+        <h5>Restam <span id="cartas-contagem">78</span> cartas</h5>
+      </div>
+      <div class="mesa-das-cartas d-flex justify-content-center flex-wrap"></div>
+    </div>
+  </div>
+
+  <div class="d-flex mb-5 mt-2 w-100 justify-content-center">
+    <button type="button" onclick="exportAsPDF()" class="me-4 btn btn-outline-primary">Exportar como PDF</button>
+    <button type="button" class="btn btn-outline-danger">Sair</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="html2canvas.js"></script>
+
+  <script src="index.js"></script>
+</body>
+
 </html>
